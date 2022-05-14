@@ -4,6 +4,7 @@ from internet import internet_payment_schedule
 from garbage import garbage_collection_schedule
 from hydro import hydro_payment_schedule
 from utility import utility_payment_schedule
+from propertyTax import property_tax_payment_schedule
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def schedules():
     hydro = hydro_payment_schedule()
     utility = utility_payment_schedule()
     garbage = garbage_collection_schedule()
+    property_tax = property_tax_payment_schedule()
 
     # internet bill   
     internet_header = """
