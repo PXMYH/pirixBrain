@@ -23,7 +23,6 @@ def schedules():
         <h1>Internet</h1>
     </header>
     """
-    print(f"internet = {internet}")
     internet_body = ""
     for date,amount in internet.items():
         internet_body += f"<p>{date}: {amount}</p>"
@@ -34,7 +33,6 @@ def schedules():
         <h1>Hydro</h1>
     </header>
     """
-    print(f"hydro = {hydro}")
     hydro_body = ""
     for date,amount in hydro.items():
         hydro_body += f"<p>{date}: {amount}</p>"
@@ -45,7 +43,6 @@ def schedules():
         <h1>Garbage Collection</h1>
     </header>
     """
-    print(f"garbage = {garbage}")
     garbage_body = ""
     for date,amount in garbage.items():
         garbage_body += f"<p>{date}: {amount}</p>"
@@ -56,9 +53,18 @@ def schedules():
         <h1>Utility</h1>
     </header>
     """
-    print(f"utility = {utility}")
     utility_body = ""
     for date,amount in utility.items():
         utility_body += f"<p>{date}: {amount}</p>"
+
+    # utility
+    gas_header = """
+    <header>
+        <h1>Gas</h1>
+    </header>
+    """
+    gas_body = ""
+    for date,amount in gas.items():
+        gas_body += f"<p>{date}: {amount}</p>"
     
-    return internet_header + internet_body + hydro_header + hydro_body + garbage_header + garbage_body + utility_header + utility_body
+    return internet_header + internet_body + hydro_header + hydro_body + garbage_header + garbage_body + utility_header + utility_body + gas_header + gas_body
