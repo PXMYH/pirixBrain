@@ -1,7 +1,7 @@
-from datetime import datetime
+from datetime import date
 
 
-def is_later_than_today(due_date: datetime.date(), today: datetime.date()):
+def is_later_than_today(due_date: date, today: date):
     # checks if the date is later than today and within the same month
     diff = due_date - today
     diff_in_s = diff.total_seconds()
