@@ -20,7 +20,7 @@ def schedules():
     property_tax = property_tax_payment_schedule()
 
     # today's date
-    from datetime import date
+    from datetime import date, datetime
     today = date.today()
     date_html = f"Today's date: {today}"
 
@@ -31,9 +31,10 @@ def schedules():
     </header>
     """
     internet_body = ""
-    for date,amount in internet.items():
-        if is_later_than_today(date, today): send_sms(f"internet bill is due at {date}, amount {amount}")
-        internet_body += f"<p>{date}: {amount}</p>"
+    for due_date,amount in internet.items():
+        due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        if is_later_than_today(due_date, today): send_sms(f"internet bill is due at {due_date}, amount {amount}")
+        internet_body += f"<p>{due_date}: {amount}</p>"
 
     # hydro bill
     hydro_header = """
@@ -42,9 +43,10 @@ def schedules():
     </header>
     """
     hydro_body = ""
-    for date,amount in hydro.items():
-        if is_later_than_today(date, today): send_sms(f"hydro bill is due at {date}, amount {amount}")
-        hydro_body += f"<p>{date}: {amount}</p>"
+    for due_date,amount in hydro.items():
+        # due_date = datetime.strptime(due_date, '%Y-%m-%d')
+        # if is_later_than_today(due_date, today): send_sms(f"hydro bill is due at {due_date}, amount {amount}")
+        hydro_body += f"<p>{due_date}: {amount}</p>"
 
     # waste collection
     garbage_header = """
@@ -53,9 +55,9 @@ def schedules():
     </header>
     """
     garbage_body = ""
-    for date,amount in garbage.items():
-        if is_later_than_today(date, today): send_sms(f"garbage collection is due at {date}, amount {amount}")
-        garbage_body += f"<p>{date}: {amount}</p>"
+    for due_date,amount in garbage.items():
+        # if is_later_than_today(due_date, today): send_sms(f"garbage collection is due at {due_date}, amount {amount}")
+        garbage_body += f"<p>{due_date}: {amount}</p>"
 
     # utility
     utility_header = """
@@ -64,9 +66,9 @@ def schedules():
     </header>
     """
     utility_body = ""
-    for date,amount in utility.items():
-        if is_later_than_today(date, today): send_sms(f"utility bill is due at {date}, amount {amount}")
-        utility_body += f"<p>{date}: {amount}</p>"
+    for due_date,amount in utility.items():
+        # if is_later_than_today(due_date, today): send_sms(f"utility bill is due at {due_date}, amount {amount}")
+        utility_body += f"<p>{due_date}: {amount}</p>"
 
     # gas
     gas_header = """
@@ -75,9 +77,9 @@ def schedules():
     </header>
     """
     gas_body = ""
-    for date,amount in gas.items():
-        if is_later_than_today(date, today): send_sms(f"gas bill is due at {date}, amount {amount}")
-        gas_body += f"<p>{date}: {amount}</p>"
+    for due_date,amount in gas.items():
+        # if is_later_than_today(due_date, today): send_sms(f"gas bill is due at {due_date}, amount {amount}")
+        gas_body += f"<p>{due_date}: {amount}</p>"
     
     return date_html + \
         internet_header + internet_body + \

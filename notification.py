@@ -1,2 +1,2 @@
 def send_sms(message: str):
-    pass
+    print(f"sending sms {message}")
