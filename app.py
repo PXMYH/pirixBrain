@@ -17,6 +17,11 @@ def schedules():
     garbage = garbage_collection_schedule()
     property_tax = property_tax_payment_schedule()
 
+    # today's date
+    from datetime import date
+    today = date.today()
+    date_html = f"Today's date: {today}"
+
     # internet bill   
     internet_header = """
     <header>
@@ -67,4 +72,9 @@ def schedules():
     for date,amount in gas.items():
         gas_body += f"<p>{date}: {amount}</p>"
     
-    return internet_header + internet_body + hydro_header + hydro_body + garbage_header + garbage_body + utility_header + utility_body + gas_header + gas_body
+    return date_html + \
+        internet_header + internet_body + \
+        hydro_header + hydro_body + \
+        garbage_header + garbage_body + \
+        utility_header + utility_body + \
+        gas_header + gas_body
