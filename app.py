@@ -5,6 +5,8 @@ from garbage import garbage_collection_schedule
 from hydro import hydro_payment_schedule
 from utility import utility_payment_schedule
 from propertyTax import property_tax_payment_schedule
+from notification import send_sms
+from utils import is_later_than_today
 
 app = Flask(__name__)
 
@@ -22,7 +24,7 @@ def schedules():
     today = date.today()
     date_html = f"Today's date: {today}"
 
-    # internet bill   
+    # internet bill
     internet_header = """
     <header>
         <h1>Internet</h1>
@@ -30,6 +32,7 @@ def schedules():
     """
     internet_body = ""
     for date,amount in internet.items():
+        if is_later_than_today(date, today): send_sms(f"internet bill is due at {date}, amount {amount}")
         internet_body += f"<p>{date}: {amount}</p>"
 
     # hydro bill
@@ -40,6 +43,7 @@ def schedules():
     """
     hydro_body = ""
     for date,amount in hydro.items():
+        if is_later_than_today(date, today): send_sms(f"hydro bill is due at {date}, amount {amount}")
         hydro_body += f"<p>{date}: {amount}</p>"
 
     # waste collection
@@ -50,6 +54,7 @@ def schedules():
     """
     garbage_body = ""
     for date,amount in garbage.items():
+        if is_later_than_today(date, today): send_sms(f"garbage collection is due at {date}, amount {amount}")
         garbage_body += f"<p>{date}: {amount}</p>"
 
     # utility
@@ -60,9 +65,10 @@ def schedules():
     """
     utility_body = ""
     for date,amount in utility.items():
+        if is_later_than_today(date, today): send_sms(f"utility bill is due at {date}, amount {amount}")
         utility_body += f"<p>{date}: {amount}</p>"
 
-    # utility
+    # gas
     gas_header = """
     <header>
         <h1>Gas</h1>
@@ -70,6 +76,7 @@ def schedules():
     """
     gas_body = ""
     for date,amount in gas.items():
+        if is_later_than_today(date, today): send_sms(f"gas bill is due at {date}, amount {amount}")
         gas_body += f"<p>{date}: {amount}</p>"
     
     return date_html + \
