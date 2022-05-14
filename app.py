@@ -11,7 +11,6 @@ app = Flask(__name__)
 def schedules():
     gas = gas_payment_schedule()
     internet = internet_payment_schedule()
-    waste_collection = garbage_collection_schedule()
     hydro = hydro_payment_schedule()
     utility = utility_payment_schedule()
     garbage = garbage_collection_schedule()
@@ -47,6 +46,17 @@ def schedules():
     print(f"garbage = {garbage}")
     garbage_body = ""
     for date,amount in garbage.items():
-        garbage_body += f"<p>{date}: {amount}</p>"    
+        garbage_body += f"<p>{date}: {amount}</p>"
+
+    # utility
+    utility_header = """
+    <header>
+        <h1>Utility</h1>
+    </header>
+    """
+    print(f"utility = {utility}")
+    utility_body = ""
+    for date,amount in utility.items():
+        utility_body += f"<p>{date}: {amount}</p>"
     
-    return internet_header + internet_body + hydro_header + hydro_body + garbage_header + garbage_body
+    return internet_header + internet_body + hydro_header + hydro_body + garbage_header + garbage_body + utility_header + utility_body
