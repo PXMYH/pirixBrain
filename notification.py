@@ -13,4 +13,5 @@ def send_email(message: str):
     destination = os.environ.get("DESTINATION_EMAIL")
     yag = yagmail.SMTP(username, password)
     contents = [message]
-    yag.send(destination, 'bill notification', contents)
+    
+    yag.send(destination, 'billing notification', contents)
