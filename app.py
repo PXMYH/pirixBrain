@@ -5,7 +5,7 @@ from garbage import garbage_collection_schedule
 from hydro import hydro_payment_schedule
 from utility import utility_payment_schedule
 from propertyTax import property_tax_payment_schedule
-from notification import send_sms
+from notification import send_email
 from utils import is_later_than_today
 
 app = Flask(__name__)
@@ -33,7 +33,7 @@ def schedules():
     internet_body = ""
     for due_date,amount in internet.items():
         due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        if is_later_than_today(due_date, today): send_sms(f"internet bill is due at {due_date}, amount {amount}")
+        if is_later_than_today(due_date, today): send_email(f"internet bill is due at {due_date}, amount {amount}")
         internet_body += f"<p>{due_date}: {amount}</p>"
 
     # hydro bill
@@ -45,7 +45,7 @@ def schedules():
     hydro_body = ""
     for due_date,amount in hydro.items():
         due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        if is_later_than_today(due_date, today): send_sms(f"hydro bill is due at {due_date}, amount {amount}")
+        if is_later_than_today(due_date, today): send_email(f"hydro bill is due at {due_date}, amount {amount}")
         hydro_body += f"<p>{due_date}: {amount}</p>"
 
     # waste collection
@@ -57,7 +57,7 @@ def schedules():
     garbage_body = ""
     for due_date,amount in garbage.items():
         due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        if is_later_than_today(due_date, today): send_sms(f"garbage collection is due at {due_date}, amount {amount}")
+        if is_later_than_today(due_date, today): send_email(f"garbage collection is due at {due_date}, amount {amount}")
         garbage_body += f"<p>{due_date}: {amount}</p>"
 
     # utility
@@ -69,7 +69,7 @@ def schedules():
     utility_body = ""
     for due_date,amount in utility.items():
         due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        if is_later_than_today(due_date, today): send_sms(f"utility bill is due at {due_date}, amount {amount}")
+        if is_later_than_today(due_date, today): send_email(f"utility bill is due at {due_date}, amount {amount}")
         utility_body += f"<p>{due_date}: {amount}</p>"
 
     # gas
@@ -81,7 +81,7 @@ def schedules():
     gas_body = ""
     for due_date,amount in gas.items():
         due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        if is_later_than_today(due_date, today): send_sms(f"gas bill is due at {due_date}, amount {amount}")
+        if is_later_than_today(due_date, today): send_email(f"gas bill is due at {due_date}, amount {amount}")
         gas_body += f"<p>{due_date}: {amount}</p>"
     
     return date_html + \
